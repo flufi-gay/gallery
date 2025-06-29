@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0 1rem;
     background: #fafafa;
-    color: #222;
+    color: #993636;
 }
 h1 {
     text-align: center;
@@ -46,7 +46,7 @@ h1 {
 }
 .card p {
     font-size: 0.95rem;
-    color: #444;
+    color: #cfcfcf;
     margin: 0.2rem 0 0.5rem 0;
     text-align: center;
 }
@@ -197,21 +197,21 @@ h1 {
 }
 /* Manual override for theme */
 body.light {
-    background: #fafafa;
-    color: #222;
+    background: #cbb6ce;
+    color: #221329;
 }
 body.light .card {
-    background: #fff;
+    background: #f3ddf6;
     box-shadow: 0 2px 8px #0001;
 }
 body.light .card:hover {
     box-shadow: 0 4px 16px #0002;
 }
 body.light .card p {
-    color: #444;
+    color: #40344b;
 }
 body.light .card .author {
-    color: #888;
+    color: #381448;
 }
 body.light .card .author a {
     color: #1976d2;
@@ -223,20 +223,20 @@ body.light .card .author a:hover {
     color: #004ba0;
 }
 body.light .toggle-theme-btn {
-    background: #fff;
-    color: #222;
+    background: #fbe7ff;
+    color: #32135d;
     border: 1px solid #bbb;
 }
 body.light .toggle-theme-btn:active {
-    background: #eee;
+    background: #ffffff;
 }
 body.light .icon-btn {
-    background: #fff;
+    background: #ffdeff;
     border: 1px solid #bbb;
-    color: #222;
+    color: #211039;
 }
 body.light .icon-btn:active {
-    background: #eee;
+    background: #eeeeee;
 }
 body.light .icon-btn.success {
     border-color: #4caf50;
@@ -244,11 +244,11 @@ body.light .icon-btn.success {
     color: #388e3c;
 }
 body.dark {
-    background: #181a1b;
+    background: #261c26;
     color: #eee;
 }
 body.dark .card {
-    background: #232527;
+    background: #332a35;
     box-shadow: 0 2px 8px #0008;
 }
 body.dark .card:hover {
@@ -270,7 +270,7 @@ body.dark .card .author a:hover {
     color: #42a5f5;
 }
 body.dark .toggle-theme-btn {
-    background: #232527;
+    background: #241f24;
     color: #eee;
     border: 1px solid #444;
 }
@@ -278,12 +278,12 @@ body.dark .toggle-theme-btn:active {
     background: #181a1b;
 }
 body.dark .icon-btn {
-    background: #232527;
+    background: #261e2a;
     border: 1px solid #444;
     color: #eee;
 }
 body.dark .icon-btn:active {
-    background: #181a1b;
+    background: #1b181b;
 }
 body.dark .icon-btn.success {
     border-color: #81c784;
