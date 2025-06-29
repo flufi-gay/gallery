@@ -60,7 +60,7 @@ const galleryOutput = extensions.metadata.map(ext => {
         name: full.name || '',
         description: full.description || '',
         shown: full.shown || {},
-        codePath: path.join(ext.relativePath, 'script.js'),
+        codePath: path.join(ext.relativePath, 'script.js').replaceAll("\\","/"),
         image,
         by: (full.by || []).map(author => ({
             name: author.name || '',
