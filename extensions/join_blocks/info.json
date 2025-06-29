@@ -1,0 +1,16 @@
+{
+    "name": "Join Blocks",
+    "id": "flfjoinblocks",
+    "description": "Extension that adds like 26 join blocks >:3",
+    "version": "1.0",
+    "shown": {
+        "gallery": true,
+        "generated-metadata": true
+    },
+    "by": [
+        {
+            "name": "Flufi",
+            "url": "https://flufi.gay"
+        }
+    ]
+}

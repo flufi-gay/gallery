@@ -1,0 +1,16 @@
+{
+    "name": "extension (display name)",
+    "id": "extension_id (from the extension js)",
+    "description": "An example extension",
+    "version": "1.0",
+    "shown": {
+        "gallery": false,
+        "generated-metadata": false
+    },
+    "by": [
+        {
+            "name": "Flufi",
+            "url": "https://flufi.gay"
+        }
+    ]
+}

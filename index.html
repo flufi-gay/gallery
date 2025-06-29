@@ -1,1 +1,145 @@
-hello world
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flufi Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <button class="toggle-theme-btn" id="toggleThemeBtn" aria-label="Toggle dark/light mode">
+        <span id="themeIcon"><i data-lucide="moon"></i></span>
+    </button>
+    <h1>Flufi Gallery</h1>
+    <div class="gallery" id="gallery"></div>
+    <div id="toast" class="toast"></div>
+    <script>
+    // Lucide icon logic for theme toggle
+    const themeBtn = document.getElementById('toggleThemeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    function setTheme(theme) {
+        document.body.classList.remove('light', 'dark');
+        if (theme === 'dark') {
+            document.body.classList.add('dark');
+            themeIcon.innerHTML = '<i data-lucide="sun"></i>';
+        } else {
+            document.body.classList.add('light');
+            themeIcon.innerHTML = '<i data-lucide="moon"></i>';
+        }
+        lucide.createIcons();
+    }
+    function getSavedTheme() {
+        return localStorage.getItem('theme');
+    }
+    function saveTheme(theme) {
+        localStorage.setItem('theme', theme);
+    }
+    function initTheme() {
+        const saved = getSavedTheme();
+        if (saved === 'dark' || saved === 'light') {
+            setTheme(saved);
+        } else {
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+    }
+    themeBtn.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+        saveTheme(isDark ? 'light' : 'dark');
+    });
+    initTheme();
+
+    // Toast logic
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(showToast._timeout);
+        showToast._timeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 1500);
+    }
+
+    fetch('generated-metadata/extensions-v0.json')
+        .then(res => res.json())
+        .then(data => {
+            const gallery = document.getElementById('gallery');
+            data.filter(ext => ext.shown.gallery).forEach(ext => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${ext.image}" alt="${ext.name}">
+                    <h2>${ext.name}</h2>
+                    <p>${ext.description}</p>
+                    <div class="author">
+                        by ${ext.by.map(a => `<a href="${a.link}" target="_blank">${a.name}</a>`).join(', ')}
+                    </div>
+                    <div class="card-actions">
+                        <button class="icon-btn" title="Copy Code" data-action="copy" data-id="${ext.id}">
+                            <i data-lucide="copy"></i>
+                        </button>
+                        <button class="icon-btn" title="Download Code" data-action="download" data-id="${ext.id}">
+                            <i data-lucide="download"></i>
+                        </button>
+                    </div>
+                `;
+                gallery.appendChild(card);
+            });
+            lucide.createIcons();
+
+            // Add event listeners for copy/download
+            document.querySelectorAll('.icon-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const action = btn.getAttribute('data-action');
+                    const id = btn.getAttribute('data-id');
+                    const ext = data.find(x => x.id === id);
+                    if (!ext || !ext.codePath) {
+                        showToast('No code available');
+                        return;
+                    }
+                    try {
+                        const resp = await fetch(ext.codePath);
+                        if (!resp.ok) throw new Error();
+                        const code = await resp.text();
+                        if (action === 'copy') {
+                            // Use a fallback for clipboard if navigator.clipboard fails
+                            try {
+                                await navigator.clipboard.writeText(code);
+                            } catch {
+                                // Fallback for older browsers
+                                const textarea = document.createElement('textarea');
+                                textarea.value = code;
+                                document.body.appendChild(textarea);
+                                textarea.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(textarea);
+                            }
+                            btn.classList.add('success');
+                            showToast('Code copied!');
+                            setTimeout(() => btn.classList.remove('success'), 800);
+                        } else if (action === 'download') {
+                            const blob = new Blob([code], {type: 'text/plain'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `${ext.slug || ext.id}.js`;
+                            document.body.appendChild(a);
+                            a.click();
+                            setTimeout(() => {
+                                document.body.removeChild(a);
+                                URL.revokeObjectURL(url);
+                            }, 100);
+                            showToast('Code downloaded!');
+                        }
+                    } catch {
+                        showToast('No code available');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

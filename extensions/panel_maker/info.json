@@ -1,0 +1,16 @@
+{
+    "name": "Panel Maker",
+    "id": "flfpanelMaker",
+    "description": "Extension for making (json) panels",
+    "version": "1.0",
+    "shown": {
+        "gallery": true,
+        "generated-metadata": true
+    },
+    "by": [
+        {
+            "name": "Flufi",
+            "url": "https://flufi.gay"
+        }
+    ]
+}

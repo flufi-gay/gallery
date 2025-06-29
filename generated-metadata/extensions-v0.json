@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "flfconsole",
+    "id": "flfconsole",
+    "name": "Console",
+    "description": "Tiny console extension",
+    "shown": {
+      "gallery": true,
+      "generated-metadata": true
+    },
+    "codePath": "extensions/console/script.js",
+    "image": "static/unknown.png",
+    "by": [
+      {
+        "name": "Flufi",
+        "link": "https://flufi.gay"
+      }
+    ]
+  },
+  {
+    "slug": "flufifiles",
+    "id": "flufifiles",
+    "name": "Flufi Files",
+    "description": "A virtual file system extension :P",
+    "shown": {
+      "gallery": true,
+      "generated-metadata": true
+    },
+    "codePath": "extensions/flufi_files/script.js",
+    "image": "static/unknown.png",
+    "by": [
+      {
+        "name": "Flufi",
+        "link": "https://flufi.gay"
+      }
+    ]
+  },
+  {
+    "slug": "flfftl",
+    "id": "flfFtl",
+    "name": "Flufi Theming Language",
+    "description": "Theming language inspired by css and rtr :3",
+    "shown": {
+      "gallery": true,
+      "generated-metadata": true
+    },
+    "codePath": "extensions/ftl_theme/script.js",
+    "image": "static/unknown.png",
+    "by": [
+      {
+        "name": "Flufi",
+        "link": "https://flufi.gay"
+      }
+    ]
+  },
+  {
+    "slug": "flfjoinblocks",
+    "id": "flfjoinblocks",
+    "name": "Join Blocks",
+    "description": "Extension that adds like 26 join blocks >:3",
+    "shown": {
+      "gallery": true,
+      "generated-metadata": true
+    },
+    "codePath": "extensions/join_blocks/script.js",
+    "image": "static/unknown.png",
+    "by": [
+      {
+        "name": "Flufi",
+        "link": "https://flufi.gay"
+      }
+    ]
+  },
+  {
+    "slug": "flfpanelmaker",
+    "id": "flfpanelMaker",
+    "name": "Panel Maker",
+    "description": "Extension for making (json) panels",
+    "shown": {
+      "gallery": true,
+      "generated-metadata": true
+    },
+    "codePath": "extensions/panel_maker/script.js",
+    "image": "static/unknown.png",
+    "by": [
+      {
+        "name": "Flufi",
+        "link": "https://flufi.gay"
+      }
+    ]
+  },
+  {
+    "slug": "rwllanguage",
+    "id": "rwlLanguage",
+    "name": "RWL",
+    "description": "Rotur Web Language parser as an extension :3",
+    "shown": {
+      "gallery": true,
+      "generated-metadata": true
+    },
+    "codePath": "extensions/rwl/script.js",
+    "image": "static/unknown.png",
+    "by": [
+      {
+        "name": "Flufi",
+        "link": "https://flufi.gay"
+      }
+    ]
+  }
+]
