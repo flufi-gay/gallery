@@ -9,7 +9,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/console/script.js",
-    "image": "images/unknown.png",
+    "image": "static/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -27,7 +27,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/flufi_files/script.js",
-    "image": "images/unknown.png",
+    "image": "static/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -45,7 +45,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/ftl_theme/script.js",
-    "image": "images/unknown.png",
+    "image": "static/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -63,7 +63,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/join_blocks/script.js",
-    "image": "images/unknown.png",
+    "image": "static/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -81,7 +81,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/panel_maker/script.js",
-    "image": "images/unknown.png",
+    "image": "static/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -99,7 +99,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/rwl/script.js",
-    "image": "images/unknown.png",
+    "image": "static/unknown.png",
     "by": [
       {
         "name": "Flufi",

@@ -55,7 +55,7 @@ const galleryOutput = extensions.metadata.map(ext => {
     const absoluteCoverPath = path.join(__dirname, coverPath);
     const image = fs.existsSync(absoluteCoverPath)
         ? coverPath
-        : 'images/unknown.png';
+        : 'static/unknown.png';
     return {
         slug: (full.id || full.name || '').toLowerCase().replace(/\s+/g, '-'),
         id: full.id || full.name || '',
