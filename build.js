@@ -1,3 +1,5 @@
+// made by sophie (@mistium on discord) i think (i forgot)
+
 const fs = require('fs');
 const path = require('path');
 

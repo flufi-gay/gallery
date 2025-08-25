@@ -1,0 +1,117 @@
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+h1, h2, h3, h4, p, a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#content {
+    position: relative;
+    top: 80px;
+
+    display: flex;
+
+    max-width: 100%;
+}
+
+#cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (max-width: 800px) {
+    #cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 500px) {
+    #cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.block, .card, .buttons > button {
+    background-color: rgb(22, 8, 53);
+    border: rgb(55, 17, 109)1px solid;
+    border-radius: 15px;
+}
+
+.card {
+    position: relative;
+    padding: 10px;
+    max-height: 100%;
+    padding-bottom: 40px;
+
+    transition: .25s ease;
+}
+
+.card:hover {
+    box-shadow: 0 2px 8px rgba(110, 78, 110, 0.533);
+    transition: .1s ease;
+}
+
+.card > img {
+    border-radius: 10px;
+    width: 100%;
+    height: fit-content;
+}
+
+.card > p {
+    text-align: center;
+    margin-top: 7.5px;
+}
+
+.author {
+    justify-content: center;
+    display: flex;
+    gap: 5px;
+    position: absolute;
+
+    left: 0px;
+    right: 65px;
+    bottom: 5px;
+}
+
+.author > a {
+    color:rgb(120, 73, 196);
+}
+
+.author > a:visited {
+    color:rgb(161, 73, 196);
+}
+
+.buttons {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 65px;
+    height: 30px;
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+}
+
+.buttons > button {
+    border-radius: 12.5px;
+
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: .075s ease;
+}
+
+.buttons > button:hover {
+    background-color: rgb(26, 10, 63);
+}

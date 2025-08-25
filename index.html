@@ -4,143 +4,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flufi Gallery</title>
-    <link rel="icon" href="https://avatars.rotur.dev/flufi" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <title>Flufi's Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://avatars.rotur.dev/flufi?radius=50px" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <button class="toggle-theme-btn" id="toggleThemeBtn" aria-label="Toggle dark/light mode">
-        <span id="themeIcon"><i data-lucide="moon"></i></span>
-    </button>
-    <h1>Flufi Gallery</h1>
-    <div class="gallery" id="gallery"></div>
-    <div id="toast" class="toast"></div>
     <script>
-    // Lucide icon logic for theme toggle
-    const themeBtn = document.getElementById('toggleThemeBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    function setTheme(theme) {
-        document.body.classList.remove('light', 'dark');
-        if (theme === 'dark') {
-            document.body.classList.add('dark');
-            themeIcon.innerHTML = '<i data-lucide="sun"></i>';
-        } else {
-            document.body.classList.add('light');
-            themeIcon.innerHTML = '<i data-lucide="moon"></i>';
-        }
-        lucide.createIcons();
-    }
-    function getSavedTheme() {
-        return localStorage.getItem('theme');
-    }
-    function saveTheme(theme) {
-        localStorage.setItem('theme', theme);
-    }
-    function initTheme() {
-        const saved = getSavedTheme();
-        if (saved === 'dark' || saved === 'light') {
-            setTheme(saved);
-        } else {
-            setTheme(prefersDark ? 'dark' : 'light');
-        }
-    }
-    themeBtn.addEventListener('click', () => {
-        const isDark = document.body.classList.contains('dark');
-        setTheme(isDark ? 'light' : 'dark');
-        saveTheme(isDark ? 'light' : 'dark');
-    });
-    initTheme();
-
-    // Toast logic
-    function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(showToast._timeout);
-        showToast._timeout = setTimeout(() => {
-            toast.classList.remove('show');
-        }, 1500);
-    }
-
-    fetch('generated-metadata/extensions-v0.json')
-        .then(res => res.json())
-        .then(data => {
-            const gallery = document.getElementById('gallery');
-            data.filter(ext => ext.shown.gallery).forEach(ext => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${ext.image}" alt="${ext.name}">
-                    <h2>${ext.name}</h2>
-                    <p>${ext.description}</p>
-                    <div class="author">
-                        by ${ext.by.map(a => `<a href="${a.link}" target="_blank">${a.name}</a>`).join(', ')}
-                    </div>
-                    <div class="card-actions">
-                        <button class="icon-btn" title="Copy Code" data-action="copy" data-id="${ext.id}">
-                            <i data-lucide="copy"></i>
-                        </button>
-                        <button class="icon-btn" title="Download Code" data-action="download" data-id="${ext.id}">
-                            <i data-lucide="download"></i>
-                        </button>
-                    </div>
-                `;
-                gallery.appendChild(card);
+        const body = document.body;
+        fetch('https://flufi.gay/base.html')
+            .then(response => response.text())
+            .then(data => {
+                body.innerHTML = data + body.innerHTML;
             });
-            lucide.createIcons();
-
-            // Add event listeners for copy/download
-            document.querySelectorAll('.icon-btn').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const action = btn.getAttribute('data-action');
-                    const id = btn.getAttribute('data-id');
-                    const ext = data.find(x => x.id === id);
-                    if (!ext || !ext.codePath) {
-                        showToast('No code available');
-                        return;
-                    }
-                    try {
-                        const resp = await fetch(ext.codePath);
-                        if (!resp.ok) throw new Error();
-                        const code = await resp.text();
-                        if (action === 'copy') {
-                            // Use a fallback for clipboard if navigator.clipboard fails
-                            try {
-                                await navigator.clipboard.writeText(code);
-                            } catch {
-                                // Fallback for older browsers
-                                const textarea = document.createElement('textarea');
-                                textarea.value = code;
-                                document.body.appendChild(textarea);
-                                textarea.select();
-                                document.execCommand('copy');
-                                document.body.removeChild(textarea);
-                            }
-                            btn.classList.add('success');
-                            showToast('Code copied!');
-                            setTimeout(() => btn.classList.remove('success'), 800);
-                        } else if (action === 'download') {
-                            const blob = new Blob([code], {type: 'text/plain'});
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = `${ext.slug || ext.id}.js`;
-                            document.body.appendChild(a);
-                            a.click();
-                            setTimeout(() => {
-                                document.body.removeChild(a);
-                                URL.revokeObjectURL(url);
-                            }, 100);
-                            showToast('Code downloaded!');
-                        }
-                    } catch {
-                        showToast('No code available');
-                    }
-                });
+        fetch('https://flufi.gay/canvas.js')
+            .then(response => response.text())
+            .then(data => {
+                let script = document.createElement("script");
+                script.textContent = data;
+                body.appendChild(script);
             });
-        });
+    </script>
+    <div id="content">
+        <div id="cards">
+
+        </div>
+    </div>
+    <script>
+        const cards = document.getElementById("cards");
+
+        const icons = {
+            // https://lucide.dev/icons/copy
+            "copy": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-icon lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`,
+            // https://lucide.dev/icons/download
+            "download": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>`
+        }
+
+        async function copy(i) {
+            const resp = await fetch(data[i].codePath);
+            const code = await resp.text();
+            await navigator.clipboard.writeText(code);
+        }
+
+        async function download(i) {
+            const ext = data[i];
+            const resp = await fetch(ext.codePath);
+            const code = await resp.text();
+            const blob = new Blob([code], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${ext.slug || ext.id}.js`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        }
+
+        function generateCard(data, i) {
+            console.log(data);
+            if (!data.shown.gallery) return;
+            const elem = document.createElement("div");
+            elem.innerHTML = `
+                <img src="${data.image}">
+                <h3>${data.name}</h3>
+                <p>${data.description}</p>
+                <span class="author">
+                    <p>by</p>${data.by.map(a => `<a href=${JSON.stringify(a.link)} target="_blank">${a.name}</a>`)}
+                </span>
+                <span class="buttons">
+                    <button onClick="copy(${i})">
+                        ${icons.copy}
+                    </button>
+                    <button onClick="download(${i})">
+                        ${icons.download}
+                    </button>
+                </span>
+            `;
+            elem.className = "card";
+            cards.appendChild(elem);
+        }
+
+        function generateAuthor(author) {
+
+        }
+
+        fetch('generated-metadata/extensions-v0.json')
+                .then(res => res.json())
+                .then(data => {
+                    window.data = data;
+                    console.log(data);
+                    for (let i = 0; i < data.length; i++) {
+                        const element = data[i];
+                        generateCard(element, i);
+                    }
+                })
     </script>
 </body>
 </html>
