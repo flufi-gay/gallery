@@ -9,7 +9,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/console/script.js",
-    "image": "static/unknown.png",
+    "image": "images/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -27,7 +27,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/flufi_files/script.js",
-    "image": "static/unknown.png",
+    "image": "images/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -45,7 +45,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/ftl_theme/script.js",
-    "image": "static/unknown.png",
+    "image": "images/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -57,13 +57,13 @@
     "slug": "flfjoinblocks",
     "id": "flfjoinblocks",
     "name": "Join Blocks",
-    "description": "Extension that adds like 26 join blocks >:3",
+    "description": "Extension that adds like 36 join blocks >:3",
     "shown": {
       "gallery": true,
       "generated-metadata": true
     },
     "codePath": "extensions/join_blocks/script.js",
-    "image": "static/unknown.png",
+    "image": "images/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -81,7 +81,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/panel_maker/script.js",
-    "image": "static/unknown.png",
+    "image": "images/unknown.png",
     "by": [
       {
         "name": "Flufi",
@@ -99,7 +99,7 @@
       "generated-metadata": true
     },
     "codePath": "extensions/rwl/script.js",
-    "image": "static/unknown.png",
+    "image": "images/unknown.png",
     "by": [
       {
         "name": "Flufi",

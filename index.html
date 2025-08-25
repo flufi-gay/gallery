@@ -76,7 +76,7 @@
                 <h3>${data.name}</h3>
                 <p>${data.description}</p>
                 <span class="author">
-                    <p>by</p>${data.by.map(a => `<a href=${JSON.stringify(a.link)} target="_blank">${a.name}</a>`)}
+                    <p>by</p>${data.by.map(a => `<a href=${JSON.stringify(a.link)} target="_blank">${a.name}</a>`).join("<p>and</p>")}
                 </span>
                 <span class="buttons">
                     <button onClick="copy(${i})">
